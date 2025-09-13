@@ -4,7 +4,7 @@ from pathlib import Path
 
 # Streamlit 페이지 설정
 st.set_page_config(
-    page_title="인공지능 음악 창작 연구 계획서",
+    page_title="서문준 html",
     page_icon="🎵",
     layout="wide"
 )
@@ -12,7 +12,7 @@ st.set_page_config(
 # HTML 파일 경로 설정
 # 현재 스크립트(app.py)가 있는 디렉토리를 기준으로 htmls/index.html 파일을 찾습니다.
 current_dir = Path(__file__).parent
-html_file_path = current_dir / "htmls" / "index.html"
+html_file_path = current_dir / "htmls" / "숫자_약수_맞추기_게임.html"
 
 # HTML 파일이 존재하는지 확인
 if not html_file_path.exists():
@@ -31,3 +31,4 @@ st.markdown("---")
 st.markdown("### 💡 Streamlit 앱 사용 팁")
 st.markdown("- `htmls` 폴더 안에 있는 `index.html` 파일의 내용을 수정하면 앱에 바로 반영됩니다.")
 st.markdown("- 더 많은 Streamlit 컴포넌트를 사용해 이 앱을 확장할 수 있습니다.")
+
