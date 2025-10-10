@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>GAN 기반 결측 이미지 복원 및 분류 탐구 보고서</title>
+<style>
+body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+h1, h2, h3 { color: #2c3e50; }
+pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+</style>
+</head>
+<body>
+
+<h1>GAN 기반 결측 이미지 복원 및 분류 탐구 보고서</h1>
+
+<h2>1. 연구 주제</h2>
+<p>GAN(Generative Adversarial Network)을 이용한 결측 이미지 복원(Inpainting) 모델 연구를 시작하려 했으나, 고등학생이 구현하기에는 난이도가 높아, 보다 간단한 형태로 변경하였습니다. 최종 주제는 "이미지 임베딩을 활용한 손상 이미지 분류 및 성능 분석"입니다.</p>
+
+<h2>2. 연구 목적</h2>
+<ul>
+<li>이미지 임베딩(Image Embedding) 기법을 활용하여 손상 이미지와 원본 이미지를 분류하는 모델을 구현</li>
+<li>분류 성능을 시각적으로 분석하고, Confusion Matrix로 결과 비교</li>
+<li>테스트 데이터의 독립성을 유지하여 정확한 성능 평가 진행</li>
+</ul>
+
+<h2>3. 실험 데이터 구성</h2>
+<p><strong>학습 데이터:</strong> 인형 사진 50장 촬영</p>
+<ul>
+<li>original: 정상 이미지 40장</li>
+<li>damaged: 손상 이미지 20장</li>
+</ul>
+<p><strong>테스트 데이터:</strong> 10장 촬영</p>
+<ul>
+<li>original: 정상 이미지 6장</li>
+<li>damaged: 손상 이미지 4장</li>
+</ul>
+<pre>dataset_v2/
+ ├─ original/
+ ├─ damaged/
+ └─ test/
+     ├─ original/
+     └─ damaged/</pre>
+
+<h2>4. 실험 방법</h2>
+<h3>4.1 Orange 데이터마이닝 활용</h3>
+<ol>
+<li>Image Import 위젯으로 학습 데이터와 테스트 데이터 불러오기</li>
+<li>Image Embedding 위젯에 SqueezeNet 모델 적용</li>
+<li>Logistic Regression 모델 학습</li>
+<li>Test & Score 위젯으로 모델 성능 평가 (Train/Test 분리 방식 적용)</li>
+<li>Confusion Matrix 위젯으로 결과 시각화</li>
+</ol>
+
+<h3>4.2 Train/Test 분리 방식</h3>
+<ul>
+<li>테스트 데이터는 학습 과정에 절대 포함되지 않도록 분리</li>
+<li>Train: 학습 데이터 Embedding</li>
+<li>Test: 테스트 데이터 Embedding</li>
+</ul>
+<pre>[Image Import (학습 데이터)] → [Image Embedding] → [Logistic Regression] → [Test & Score] → [Confusion Matrix]
+                                                          ↑
+[Image Import (테스트 데이터)] → [Image Embedding]</pre>
+
+<h2>5. 결과 및 분석</h2>
+<h3>5.1 Confusion Matrix</h3>
+<p>Confusion Matrix를 통해 모델이 테스트 데이터의 Actual 값과 Predicted 값을 비교.</p>
+<ul>
+<li>모델의 분류 정확도를 확인 가능</li>
+<li>테스트 데이터의 라벨(Original/Damaged)과 예측값이 일치하는지 시각적으로 확인</li>
+</ul>
+
+<h3>5.2 성능 평가</h3>
+<ul>
+<li>Accuracy, Precision, Recall, F1-score 확인</li>
+<li>테스트 데이터가 독립적으로 유지되어 성능 평가의 신뢰성 확보</li>
+</ul>
+
+<h2>6. 결론 및 의의</h2>
+<p>이번 탐구를 통해:</p>
+<ul>
+<li>이미지 임베딩과 Logistic Regression을 결합한 손상 이미지 분류 모델을 구현함</li>
+<li>Train/Test 분리 방식을 통해 테스트 데이터의 독립성을 확보</li>
+<li>Confusion Matrix를 활용하여 분류 성능을 명확히 시각화함</li>
+</ul>
+
+<h3>의의</h3>
+<p>이 탐구는 GAN 기반 이미지 복원 연구로 확장 가능하며, 데이터 전처리, 임베딩, 분류 및 성능 시각화 전 과정을 이해하는 데 중요한 기초를 제공합니다.</p>
+
+<h2>7. 발표 준비 사항</h2>
+<ul>
+<li>폴더 구조와 Orange 워크플로 구조 그림 첨부</li>
+<li>Confusion Matrix 분석 결과 첨부</li>
+<li>실험 과정과 결과를 시각 자료와 함께 발표</li>
+</ul>
+
+<h2>8. 참고 자료</h2>
+<ul>
+<li>Orange Data Mining Documentation</li>
+<li>SqueezeNet 모델 설명 자료</li>
+<li>Confusion Matrix 해석 자료</li>
+</ul>
+
+</body>
+</html>
